@@ -50,14 +50,11 @@ public class Main {
 
            if (number>=45) {
                choosingFromList(list, "Common");
-           }else
-           if (number>=19) {
+           }else if (number>=19) {
                choosingFromList(list, "Rare");
-           }else
-           if (number>=5) {
+           }else if (number>=5) {
                choosingFromList(list, "Elite");
-           }else
-           if (number>=2) {
+           }else if (number>=2) {
                choosingFromList(list, "Super Rare");
                SRUR = true;
            }else {
@@ -68,7 +65,7 @@ public class Main {
        }
        if (SRUR.equals(false)) {
            choosingFromList(list, "Super Rare");
-           System.out.println("Bad luck!!!");
+           System.out.println("Bad luck!!!!");
        }
     }
 
