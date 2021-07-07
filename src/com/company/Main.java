@@ -68,7 +68,7 @@ public class Main {
        }
        if (SRUR.equals(false)) {
            choosingFromList(list, "Super Rare");
-           System.out.println("Bad luck!!");
+           System.out.println("Bad luck!!!");
        }
     }
 
