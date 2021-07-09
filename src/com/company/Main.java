@@ -72,9 +72,9 @@ public class Main {
     public static void choosingFromList(List<Ship> list, String rarityWord) {
         System.out.println(rarityWord);
         List<Ship> newRarityList = getFilteredList(list, rarityWord);
-        Ship ab = pickRandomShip(newRarityList);
-        System.out.println(ab);
-        showImage(ab.getImage());
+        Ship randShip = pickRandomShip(newRarityList);
+        System.out.println(randShip);
+        showImage(randShip.getImage());
     }
 
     public static List<Ship> getFilteredList(List<Ship> list, String rarityWord) {
