@@ -94,7 +94,7 @@ public class Main {
 
     public static void createWindow(JLabel label) {
        JFrame frame = new JFrame("Ships");
-        //frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1210,630);
         frame.setVisible(true);
