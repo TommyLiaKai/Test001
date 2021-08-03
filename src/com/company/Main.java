@@ -3,6 +3,7 @@ package com.company;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -12,8 +13,14 @@ public class Main {
 
     public static void main(String[] args) {
         List<Ship> list = new ArrayList<>();
-        createList(list);
-        gacha(list);
+        try {
+            JDBC.dbInit();
+            createList(list);
+            gacha(list);
+        } catch (SQLException e) {
+            System.out.println("An error occurred while connecting MySQL database");
+            e.printStackTrace();
+        }
     }
 
    public static void createList(List<Ship> list) {
