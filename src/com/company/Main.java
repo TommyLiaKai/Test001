@@ -13,38 +13,14 @@ public class Main {
 
     public static void main(String[] args) {
         List<Ship> list = new ArrayList<>();
+        //createList(list);
         try {
-            JDBC.dbInit();
-            createList(list);
-            gacha(list);
+            list = JDBC.retrieveShipList();
         } catch (SQLException e) {
-            System.out.println("An error occurred while connecting MySQL database");
+            System.out.println("An error occurred while connecting MySQL database!");
             e.printStackTrace();
         }
-    }
-
-   public static void createList(List<Ship> list) {
-        list.add(new Ship("Laffey", "Elite", "Destroyer", "USA", "LaffeyShip.jpg"));
-        list.add(new Ship("Warspite", "Ultra Rare", "Battleship", "Great Britain", "WarspiteShip.jpg"));
-        list.add(new Ship("Enterprise", "Super Rare", "Aircraft Carrier", "USA", "EnterpriseShip.jpg"));
-        list.add(new Ship("Southampton", "Rare", "Light Cruiser", "Great Britain", "SouthamptonShip.jpg"));
-        list.add(new Ship("Pensacola", "Common", "Heavy Cruiser", "USA", "PensacolaShip.jpg"));
-        list.add(new Ship("Vittorio Veneto", "Super Rare", "Battleship", "Italy", "VenetoShip.jpg"));
-        list.add(new Ship("Yat Sen", "Elite", "Light Crusader", "China", "YatSenShip.jpg"));
-        list.add(new Ship("Kisaragi", "Common", "Destroyer", "Japan", "KisaragiShip.jpg"));
-        list.add(new Ship("Shinano", "Ultra Rare", "Aircraft Carrier", "Japan", "ShinanoShip.jpg"));
-        list.add(new Ship("Spence", "Common", "Destroyer", "USA", "SpenceShip.jpg"));
-        list.add(new Ship("New Castle", "Elite", "Light Cruiser", "Great Britain", "NewCastleShip.jpg"));
-        list.add(new Ship("Friedrich Der Grosse", "Ultra Rare", "Battleship", "Germany", "FriedrichShip.jpg"));
-        list.add(new Ship("Curacoa", "Rare", "Light Cruiser", "Great Britain", "CuracoaShip.jpg"));
-        list.add(new Ship("Trento", "", "Heavy Cruiser", "Italy", "TrentoShip.jpg"));
-        list.add(new Ship("Hunter", "Rare", "Destroyer", "Great Britain", "HunterShip.jpg"));
-        list.add(new Ship("Hardy", "Elite", "Destroyer", "Great Britain", "HardyShip.jpg"));
-        list.add(new Ship("Jean Bart", "Super Rare", "BattleShip", "France", "JeanBartShip.jpg"));
-        list.add(new Ship("Saint Louis", "Super Rare", "Heavy Cruiser", "France", "SaintLouisShip.jpg"));
-        list.add(new Ship("Omaha", "Common", "Light Cruiser", "USA", "OmahaShip.jpg"));
-        list.add(new Ship("Eagle", "Elite", "Aircraft Carrier", "USA", "EagleShip.jpg"));
-        System.out.println(list);
+        gacha(list);
     }
 
    public static void gacha(List<Ship> list) {
