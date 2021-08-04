@@ -23,20 +23,17 @@ public class JDBC {
     public static void post(List<Ship> ships) throws SQLException {
         Connection connection = dbInit();
         System.out.println("Writing to database...");
-        PreparedStatement posted = connection.prepareStatement("INSERT INTO ships (id, name, rarity, type, nationality, image) VALUES (?,?,?,?,?,?)");
-        int i = 0;
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ships (name, rarity, type, nationality, image) VALUES (?,?,?,?,?)");
 
         for (Ship n: ships) {
-            posted.setInt(1, i);
-            posted.setString(2, n.getName());
-            posted.setString(3, n.getRarity());
-            posted.setString(4, n.getType());
-            posted.setString(5, n.getNationality());
-            posted.setString(6, n.getImage());
-            posted.executeUpdate();
-            i++;
+            preparedStatement.setString(1, n.getName());
+            preparedStatement.setString(2, n.getRarity());
+            preparedStatement.setString(3, n.getType());
+            preparedStatement.setString(4, n.getNationality());
+            preparedStatement.setString(5, n.getImage());
+            preparedStatement.executeUpdate();
         }
-        posted.close();
+        preparedStatement.close();
         connection.close();
     }
 
@@ -53,7 +50,17 @@ public class JDBC {
                     resultSet.getString("type"),resultSet.getString("nationality"),resultSet.getString("image"));
             ships.add(ship);
         }
+        preparedStatement.close();
         connection.close();
         return ships;
+    }
+
+    public static void deleteAllRows() throws SQLException {
+        Connection connection = dbInit();
+        PreparedStatement preparedStatement = connection.prepareStatement("truncate ships");
+        preparedStatement.executeUpdate();
+        System.out.println("Deleting all rows from database...");
+        preparedStatement.close();
+        connection.close();
     }
 }

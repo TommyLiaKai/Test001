@@ -57,6 +57,6 @@ public class Ship {
 
 
     public String toString() {
-        return "Name: " + name + ", Rarity: " + rarity + ", Type: " + type + ", Nationality: " + nationality + "\n";
+        return "Name: " + name + ", Rarity: " + rarity + ", Type: " + type + ", Nationality: " + nationality;
     }
 }
