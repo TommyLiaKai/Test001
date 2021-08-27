@@ -6,11 +6,11 @@ import java.util.List;
 
 public class JDBC {
 
-    private static final String url = "jdbc:mysql://localhost:3306/shipstest";
-    private static final String user = "root";
-    private static final String password = "";
+    final private String url = "jdbc:mysql://localhost:3306/shipstest";
+    final private String user = "root";
+    final private String password = "";
 
-    private static Connection dbInit() throws SQLException {
+    private Connection dbInit() throws SQLException {
 
         Connection dbConnection = DriverManager.getConnection(url, user, password);
 
@@ -21,7 +21,7 @@ public class JDBC {
     }
 
     public static void post(List<Ship> ships) throws SQLException {
-        Connection connection = dbInit();
+        Connection connection = new JDBC().dbInit();
         System.out.println("Writing to database...");
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ships (name, rarity, type, nationality, image) VALUES (?,?,?,?,?)");
 
@@ -38,7 +38,7 @@ public class JDBC {
     }
 
     public static List<Ship> retrieveShipList() throws SQLException {
-        Connection connection = dbInit();
+        Connection connection = new JDBC().dbInit();
         System.out.println("Getting from database...");
         List<Ship> ships = new ArrayList<>();
         ResultSet resultSet = null;
@@ -56,7 +56,7 @@ public class JDBC {
     }
 
     public static void deleteAllRows() throws SQLException {
-        Connection connection = dbInit();
+        Connection connection = new JDBC().dbInit();
         PreparedStatement preparedStatement = connection.prepareStatement("truncate ships");
         preparedStatement.executeUpdate();
         System.out.println("Deleting all rows from database...");
