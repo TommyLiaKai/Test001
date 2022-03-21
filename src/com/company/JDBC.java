@@ -46,10 +46,14 @@ public class JDBC {
         PreparedStatement preparedStatement = connection.prepareStatement("Select * from ships");
         resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Ship ship = new Ship(resultSet.getString("name"),resultSet.getString("rarity"),
-                    resultSet.getString("type"),resultSet.getString("nationality"),resultSet.getString("image"));
+            Ship ship = new Ship(resultSet.getString("name"),
+                    resultSet.getString("rarity"),
+                    resultSet.getString("type"),
+                    resultSet.getString("nationality"),
+                    resultSet.getString("image"));
             ships.add(ship);
         }
+        resultSet.close();
         preparedStatement.close();
         connection.close();
         return ships;

@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -67,7 +68,10 @@ public class Gacha {
     }
 
     public static List<Ship> getFilteredList(List<Ship> list, String rarityWord) {
-        return list.stream().filter(p -> p.getRarity().equals(rarityWord)).collect(Collectors.toList());
+        return list.stream()
+                .filter(ship -> ship.getRarity().equals(rarityWord))
+                .sorted(Comparator.comparing(ship -> ship.getName()))
+                .collect(Collectors.toList());
     }
 
     public static Ship pickRandomShip(List<Ship> list) {
