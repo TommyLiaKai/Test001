@@ -31,35 +31,42 @@ public class Gacha {
     }
 
     public static void summoning(List<Ship> list) {
-        int number;
-        Boolean SRUR = false;
-
-        for (int i=0; i<10; i++) {
-            Random rate = new Random();
-            number = rate.nextInt(100);
-
-            if (number>=45) {
-                choosingFromList(list, "Common");
-            }else if (number>=19) {
-                choosingFromList(list, "Rare");
-            }else if (number>=5) {
-                choosingFromList(list, "Elite");
-            }else if (number>=2) {
-                choosingFromList(list, "Super Rare");
-                SRUR = true;
-            }else {
-                choosingFromList(list, "Ultra Rare");
-                SRUR = true;
-            }
-            System.out.println("Rolled: " + number + "\n");
+        Boolean srurExist = false;
+        for (int i=0; i<9; i++) {
+           srurExist = summonRates(list, srurExist);
         }
-        if (SRUR.equals(false)) {
+        if (srurExist.equals(false)) {
             choosingFromList(list, "Super Rare");
             System.out.println("Bad luck!!!!");
+        }else {
+            summonRates(list, true);
+            System.out.println("Congrats!!!!");
         }
     }
 
-    public static void choosingFromList(List<Ship> list, String rarityWord) {
+    private static boolean summonRates(List<Ship> list, boolean srurExist) {
+        int number;
+        Random rate = new Random();
+        number = rate.nextInt(100);
+
+        if (number>=45) {
+            choosingFromList(list, "Common");
+        }else if (number>=19) {
+            choosingFromList(list, "Rare");
+        }else if (number>=5) {
+            choosingFromList(list, "Elite");
+        }else if (number>=2) {
+            choosingFromList(list, "Super Rare");
+            srurExist = true;
+        }else {
+            choosingFromList(list, "Ultra Rare");
+            srurExist = true;
+        }
+        System.out.println("Rolled: " + number + "\n");
+        return srurExist;
+    }
+
+    private static void choosingFromList(List<Ship> list, String rarityWord) {
         System.out.println(rarityWord);
         List<Ship> newRarityList = getFilteredList(list, rarityWord);
         Ship randShip = pickRandomShip(newRarityList);
@@ -67,14 +74,14 @@ public class Gacha {
         WindowGUI.showImage(randShip.getImage());
     }
 
-    public static List<Ship> getFilteredList(List<Ship> list, String rarityWord) {
+    private static List<Ship> getFilteredList(List<Ship> list, String rarityWord) {
         return list.stream()
                 .filter(ship -> ship.getRarity().equals(rarityWord))
                 .sorted(Comparator.comparing(ship -> ship.getName()))
                 .collect(Collectors.toList());
     }
 
-    public static Ship pickRandomShip(List<Ship> list) {
+    private static Ship pickRandomShip(List<Ship> list) {
         return list.get(new Random().nextInt(list.size()));
     }
 }
